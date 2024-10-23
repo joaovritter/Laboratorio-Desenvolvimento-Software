@@ -30,13 +30,14 @@ public class VeiculoDAO {
 
     public void inserir (Veiculo veiculo){
         try {
-            String sql = "INSERT INTO veiculo (modelo,pessoa,id_pessoa) VALUES (?,?,?)";
+            String sql = "INSERT INTO veiculo (modelo,placa,id_pessoa) VALUES (?,?,?)";
             
             PreparedStatement stmt = this.conn.prepareStatement(sql);
             stmt.setString(1,veiculo.getModelo());
             stmt.setString(2,veiculo.getPlaca()); 
             stmt.setInt(3,veiculo.getPessoaid().getId());
             stmt.execute(); 
+            System.out.println("Veiculo Inserido");
         } catch (SQLException ex) {
             System.out.println("Erro ao inserir veiculo: "+ex.getMessage());
         } 
@@ -48,6 +49,7 @@ public class VeiculoDAO {
             stmt.setString(1, veiculo.getModelo());
             stmt.setString(2, veiculo.getPlaca());
             stmt.setInt(3, veiculo.getPessoaid().getId());
+            stmt.setInt(4,veiculo.getId());
             stmt.execute();
         } catch (SQLException ex) {
             System.out.println("Erro ao atualizar veiculo: "+ex.getMessage());

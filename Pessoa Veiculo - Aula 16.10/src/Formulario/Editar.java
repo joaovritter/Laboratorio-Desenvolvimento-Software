@@ -8,6 +8,7 @@ import DAO.PessoaDAO;
 import DAO.VeiculoDAO;
 import beans.Pessoa;
 import beans.Veiculo;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,8 +22,22 @@ public class Editar extends javax.swing.JFrame {
      */
     public Editar() {
         initComponents();
+        //preencherComboPessoas();
         
     }
+    Pessoa pessoaRecuperada;
+    
+    /*
+    public void preencherComboPessoas() {
+    PessoaDAO pDAO = new PessoaDAO();
+    List<Pessoa> listaP = pDAO.getPessoas();
+    
+    for (Pessoa p : listaP) {
+        cmb_Pessoas.addItem(""+p); // O método toString() será chamado automaticamente
+    } 
+    cmb_Pessoas.setSelectedIndex(-1); // Remove a seleção inicial
+    }
+ */  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,14 +57,16 @@ public class Editar extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txt_Modelo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         btn_Consultar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         txt_Id2 = new javax.swing.JTextField();
         btn_Atualizar = new javax.swing.JButton();
         btn_Excluir = new javax.swing.JButton();
-        cmb_Pessoas = new javax.swing.JComboBox<>();
         txt_Placa = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        txt_Dono = new javax.swing.JTextField();
+        txt_IdDono = new javax.swing.JTextField();
 
         jScrollPane1.setViewportView(jTextPane1);
 
@@ -62,11 +79,15 @@ public class Editar extends javax.swing.JFrame {
         jLabel2.setMaximumSize(new java.awt.Dimension(156, 16));
         jLabel2.setName(""); // NOI18N
 
+        txt_Id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_IdActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("Modelo");
 
         jLabel4.setText("Placa");
-
-        jLabel5.setText("Id Pessoa");
 
         btn_Consultar.setText("Consultar");
         btn_Consultar.addActionListener(new java.awt.event.ActionListener() {
@@ -98,62 +119,68 @@ public class Editar extends javax.swing.JFrame {
             }
         });
 
-        cmb_Pessoas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmb_PessoasActionPerformed(evt);
-            }
-        });
+        jLabel7.setText("Dono");
+
+        jLabel8.setText("Id");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btn_Atualizar)
-                        .addGap(27, 27, 27)
-                        .addComponent(btn_Excluir)
-                        .addGap(36, 36, 36))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btn_Atualizar))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(49, 49, 49)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(19, 19, 19)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txt_Modelo)
-                                            .addComponent(txt_Id2, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel6))
+                                        .addGap(8, 8, 8)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(19, 19, 19)
-                                                .addComponent(txt_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(txt_Placa)
-                                                    .addComponent(cmb_Pessoas, 0, 96, Short.MAX_VALUE))))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btn_Consultar)))))
-                        .addContainerGap(162, Short.MAX_VALUE))))
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(txt_Id2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(txt_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(btn_Consultar))))
+                                            .addComponent(txt_Modelo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txt_Placa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(27, 27, 27)
+                        .addComponent(btn_Excluir)
+                        .addGap(24, 24, 24))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(67, 67, 67)
+                                .addComponent(txt_Dono, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txt_IdDono, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(117, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
@@ -170,15 +197,17 @@ public class Editar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_Placa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(cmb_Pessoas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(txt_Dono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_IdDono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Excluir)
                     .addComponent(btn_Atualizar))
-                .addGap(0, 22, Short.MAX_VALUE))
+                .addGap(17, 17, 17))
         );
 
         pack();
@@ -200,21 +229,30 @@ public class Editar extends javax.swing.JFrame {
             txt_Id2.setText(txt_Id.getText());
             txt_Modelo.setText(v.getModelo());
             txt_Placa.setText(v.getPlaca());
-            cmb_Pessoas.setSelectedItem((Pessoa) v.getPessoaid());
+            
+            pessoaRecuperada = v.getPessoaid();
+            txt_Dono.setText(v.getPessoaid().getNome());
+            txt_IdDono.setText(String.valueOf(pessoaRecuperada.getId()));
+        
         }
-
-
+        
     }//GEN-LAST:event_btn_ConsultarActionPerformed
 
     private void btn_AtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AtualizarActionPerformed
-
+        int idVeiculo = Integer.parseInt(txt_Id.getText()); // ID do veículo
+       
+        VeiculoDAO vDAO = new VeiculoDAO();
+        Pessoa p = new Pessoa();
+        p.setId(Integer.parseInt(txt_IdDono.getText()));
+        p.setNome(txt_Dono.getText());
+        
         Veiculo v = new Veiculo();
+        
         v.setId (Integer.parseInt(txt_Id2.getText()));    
         v.setModelo(txt_Modelo.getText());
         v.setPlaca(txt_Placa.getText());
-        v.setPessoaid((Pessoa) cmb_Pessoas.getSelectedItem());
-        
-        VeiculoDAO vDAO = new VeiculoDAO();
+        v.setPessoaid(p);
+
         vDAO.editar(v);
         limparFormulario();
          
@@ -231,19 +269,23 @@ public class Editar extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btn_ExcluirActionPerformed
 
-    private void cmb_PessoasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_PessoasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmb_PessoasActionPerformed
-
     private void txt_Id2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_Id2ActionPerformed
-
+        txt_Id2.setEditable(false);
     }//GEN-LAST:event_txt_Id2ActionPerformed
-     private void limparFormulario() {
-        txt_Id.setText("");
+
+    private void txt_IdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_IdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_IdActionPerformed
+     private void limparFormulario(){
         txt_Modelo.setText("");
-        btng_Sexo.clearSelection();
-        cmb_Pessoas.setSelectedIndex(0);
+        txt_Placa.setText("");
+        txt_Dono.setText("");
+        txt_IdDono.setText("");
     }
+     
+    
+    
+
    
     /**
      * @param args the command line arguments
@@ -285,17 +327,19 @@ public class Editar extends javax.swing.JFrame {
     private javax.swing.JButton btn_Consultar;
     private javax.swing.JButton btn_Excluir;
     private javax.swing.ButtonGroup btng_Sexo;
-    private javax.swing.JComboBox<String> cmb_Pessoas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTextField txt_Dono;
     private javax.swing.JTextField txt_Id;
     private javax.swing.JTextField txt_Id2;
+    private javax.swing.JTextField txt_IdDono;
     private javax.swing.JTextField txt_Modelo;
     private javax.swing.JTextField txt_Placa;
     // End of variables declaration//GEN-END:variables

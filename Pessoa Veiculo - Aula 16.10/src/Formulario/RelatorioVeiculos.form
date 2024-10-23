@@ -76,7 +76,7 @@
                 <Column editable="true" title="Id" type="java.lang.Object"/>
                 <Column editable="true" title="Modelo" type="java.lang.Object"/>
                 <Column editable="true" title="Placa" type="java.lang.Object"/>
-                <Column editable="true" title="Id Pessoa" type="java.lang.Object"/>
+                <Column editable="true" title="Dono" type="java.lang.Object"/>
               </Table>
             </Property>
           </Properties>

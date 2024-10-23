@@ -68,7 +68,7 @@ public class RelatorioVeiculos extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Id", "Modelo", "Placa", "Id Pessoa"
+                "Id", "Modelo", "Placa", "Dono"
             }
         ));
         jScrollPane1.setViewportView(tbl_Veiculos);
