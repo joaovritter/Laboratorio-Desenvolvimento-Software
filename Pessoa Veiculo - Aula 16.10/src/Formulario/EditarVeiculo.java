@@ -9,35 +9,35 @@ import DAO.VeiculoDAO;
 import beans.Pessoa;
 import beans.Veiculo;
 import java.util.List;
+import Conexao.Conexao;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author laboratorio
  */
-public class Editar extends javax.swing.JFrame {
+public class EditarVeiculo extends javax.swing.JFrame {
 
     /**
      * Creates new form Editar
      */
-    public Editar() {
+    public EditarVeiculo() {
         initComponents();
-        //preencherComboPessoas();
+        preencherComboPessoas();
         
     }
-    Pessoa pessoaRecuperada;
+ 
     
-    /*
+    
     public void preencherComboPessoas() {
-    PessoaDAO pDAO = new PessoaDAO();
-    List<Pessoa> listaP = pDAO.getPessoas();
+        PessoaDAO pDAO = new PessoaDAO();
+        List<Pessoa> listaP = pDAO.getPessoas();
     
-    for (Pessoa p : listaP) {
-        cmb_Pessoas.addItem(""+p); // O método toString() será chamado automaticamente
-    } 
-    cmb_Pessoas.setSelectedIndex(-1); // Remove a seleção inicial
+        for (Pessoa p : listaP) {
+            cmb_Pessoas.addItem(p); // O método toString() será chamado automaticamente
+       } 
     }
- */  
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,10 +63,8 @@ public class Editar extends javax.swing.JFrame {
         btn_Atualizar = new javax.swing.JButton();
         btn_Excluir = new javax.swing.JButton();
         txt_Placa = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        txt_Dono = new javax.swing.JTextField();
-        txt_IdDono = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        cmb_Pessoas = new javax.swing.JComboBox();
 
         jScrollPane1.setViewportView(jTextPane1);
 
@@ -119,9 +117,7 @@ public class Editar extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setText("Dono");
-
-        jLabel8.setText("Id");
+        jLabel5.setText("Dono");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,37 +139,32 @@ public class Editar extends javax.swing.JFrame {
                                             .addComponent(jLabel4)
                                             .addComponent(jLabel3)
                                             .addComponent(jLabel6))
-                                        .addGap(8, 8, 8)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addGap(19, 19, 19)
+                                                .addGap(8, 8, 8)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(txt_Modelo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txt_Placa, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                                                    .addComponent(cmb_Pessoas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(txt_Id2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addGroup(layout.createSequentialGroup()
                                                         .addComponent(txt_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(btn_Consultar))))
-                                            .addComponent(txt_Modelo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txt_Placa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                                        .addGap(33, 33, 33)
+                                                        .addComponent(btn_Consultar))
+                                                    .addComponent(txt_Id2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addGap(0, 120, Short.MAX_VALUE)))
                         .addGap(27, 27, 27)
                         .addComponent(btn_Excluir)
                         .addGap(24, 24, 24))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(67, 67, 67)
-                                .addComponent(txt_Dono, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt_IdDono, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(117, Short.MAX_VALUE))))
+                        .addComponent(jLabel5)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(100, 100, 100))
+                .addGap(109, 109, 109))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,11 +189,9 @@ public class Editar extends javax.swing.JFrame {
                     .addComponent(txt_Placa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(txt_Dono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_IdDono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(cmb_Pessoas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Excluir)
@@ -230,10 +219,8 @@ public class Editar extends javax.swing.JFrame {
             txt_Modelo.setText(v.getModelo());
             txt_Placa.setText(v.getPlaca());
             
-            pessoaRecuperada = v.getPessoaid();
-            txt_Dono.setText(v.getPessoaid().getNome());
-            txt_IdDono.setText(String.valueOf(pessoaRecuperada.getId()));
-        
+            Pessoa pessoaSelecionada = (Pessoa)v.getPessoaid();
+            cmb_Pessoas.setSelectedItem(pessoaSelecionada);
         }
         
     }//GEN-LAST:event_btn_ConsultarActionPerformed
@@ -243,8 +230,8 @@ public class Editar extends javax.swing.JFrame {
        
         VeiculoDAO vDAO = new VeiculoDAO();
         Pessoa p = new Pessoa();
-        p.setId(Integer.parseInt(txt_IdDono.getText()));
-        p.setNome(txt_Dono.getText());
+        //p.setId(Integer.parseInt(txt_IdDono.getText()));
+        //p.setNome(txt_Dono.getText());
         
         Veiculo v = new Veiculo();
         
@@ -279,8 +266,7 @@ public class Editar extends javax.swing.JFrame {
      private void limparFormulario(){
         txt_Modelo.setText("");
         txt_Placa.setText("");
-        txt_Dono.setText("");
-        txt_IdDono.setText("");
+        cmb_Pessoas.setSelectedIndex(0);
     }
      
     
@@ -304,20 +290,21 @@ public class Editar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Editar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarVeiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Editar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarVeiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Editar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarVeiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Editar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarVeiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Editar().setVisible(true);
+                new EditarVeiculo().setVisible(true);
             }
         });
     }
@@ -327,19 +314,17 @@ public class Editar extends javax.swing.JFrame {
     private javax.swing.JButton btn_Consultar;
     private javax.swing.JButton btn_Excluir;
     private javax.swing.ButtonGroup btng_Sexo;
+    private javax.swing.JComboBox cmb_Pessoas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JTextField txt_Dono;
     private javax.swing.JTextField txt_Id;
     private javax.swing.JTextField txt_Id2;
-    private javax.swing.JTextField txt_IdDono;
     private javax.swing.JTextField txt_Modelo;
     private javax.swing.JTextField txt_Placa;
     // End of variables declaration//GEN-END:variables

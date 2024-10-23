@@ -83,14 +83,9 @@ public class Pessoa {
             return false;
         }
         return Objects.equals(this.idioma, other.idioma);
+        
+        
     }
-    
-    
-    
-
-   
-   
-    
-    
+  
     
 }
