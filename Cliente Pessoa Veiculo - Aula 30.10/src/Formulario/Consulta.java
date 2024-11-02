@@ -97,7 +97,7 @@ public class Consulta extends javax.swing.JFrame {
                             .addComponent(lbl_Idioma)
                             .addComponent(lbl_Sexo)
                             .addComponent(lbl_Nome))))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
