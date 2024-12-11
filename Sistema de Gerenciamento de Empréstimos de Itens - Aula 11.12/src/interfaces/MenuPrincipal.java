@@ -2,7 +2,6 @@ package interfaces;
 
 public class MenuPrincipal extends javax.swing.JFrame {
 
-
     public MenuPrincipal() {
         initComponents();
     }
@@ -27,7 +26,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        MenuCadastro.setText("Cadastro");
+        MenuCadastro.setText("Cadastros");
 
         MenuItemUsuario.setText("Usuário");
         MenuItemUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -59,9 +58,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(MenuRegistro);
 
-        MenuRelatorio.setText("Relatório");
+        MenuRelatorio.setText("Relatórios");
 
-        MenuItemEmprestimo.setText("Empréstimos");
+        MenuItemEmprestimo.setText("Mais emprestados");
         MenuItemEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenuItemEmprestimoActionPerformed(evt);
@@ -69,7 +68,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         MenuRelatorio.add(MenuItemEmprestimo);
 
-        MenuItemDevolucao.setText("Devoluções");
+        MenuItemDevolucao.setText("Em atraso");
         MenuItemDevolucao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenuItemDevolucaoActionPerformed(evt);
@@ -109,7 +108,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 251, Short.MAX_VALUE)
+            .addGap(0, 263, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,22 +133,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuItemItemActionPerformed
 
     private void MenuItemRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemRegistroActionPerformed
-        Registro registro = new  Registro();
+        Registro registro = new Registro();
         registro.setVisible(true);
     }//GEN-LAST:event_MenuItemRegistroActionPerformed
 
     private void MenuItemEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemEmprestimoActionPerformed
-        RelatorioEmprestados relatorio = new  RelatorioEmprestados();
+        RelatorioEmprestados relatorio = new RelatorioEmprestados();
         relatorio.setVisible(true);
     }//GEN-LAST:event_MenuItemEmprestimoActionPerformed
 
     private void MenuItemDevolucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemDevolucaoActionPerformed
-        RelatorioDevolucoes relatorio = new  RelatorioDevolucoes();
+        RelatorioDevolucoes relatorio = new RelatorioDevolucoes();
         relatorio.setVisible(true);
     }//GEN-LAST:event_MenuItemDevolucaoActionPerformed
 
     private void MenuItemConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemConsultaActionPerformed
-        ConsultaHistorico consulta = new  ConsultaHistorico();
+        ConsultaHistorico consulta = new ConsultaHistorico();
         consulta.setVisible(true);
     }//GEN-LAST:event_MenuItemConsultaActionPerformed
 

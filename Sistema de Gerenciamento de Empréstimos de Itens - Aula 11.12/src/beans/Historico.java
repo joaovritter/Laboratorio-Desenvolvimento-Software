@@ -1,14 +1,13 @@
 package beans;
 
-import java.sql.Timestamp;
 import java.util.Objects;
 
 public class Historico {
 
     private int id_historico;
-    private int id_emprestimo;  // Agora é um inteiro, pois é o ID do empréstimo
+    private int id_emprestimo;
     private String estado;
-    private String data_acao;  // Usando Timestamp para refletir o tipo do banco
+    private String data_acao;
 
     public Historico() {
     }

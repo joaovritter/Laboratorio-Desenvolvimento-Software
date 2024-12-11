@@ -6,7 +6,7 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="MenuCadastro">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cadastro"/>
+            <Property name="text" type="java.lang.String" value="Cadastros"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="MenuItemUsuario">
@@ -44,12 +44,12 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="MenuRelatorio">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Relat&#xf3;rio"/>
+            <Property name="text" type="java.lang.String" value="Relat&#xf3;rios"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="MenuItemEmprestimo">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Empr&#xe9;stimos"/>
+                <Property name="text" type="java.lang.String" value="Mais emprestados"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuItemEmprestimoActionPerformed"/>
@@ -57,7 +57,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="MenuItemDevolucao">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Devolu&#xe7;&#xf5;es"/>
+                <Property name="text" type="java.lang.String" value="Em atraso"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuItemDevolucaoActionPerformed"/>
@@ -121,7 +121,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="251" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="263" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">

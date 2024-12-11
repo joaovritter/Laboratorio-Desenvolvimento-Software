@@ -1,33 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package beans;
 
 import java.util.Date;
 import java.util.Objects;
 
-/**
- *
- * @author salam
- */
 public class View_HistoricoEmprestimo {
+
     private int idHistorico;
     private int idEmprestimo;
     private String responsavel;
     private String item;
     private String status;
     private Date dataAtualizacao;
+    private String matriculaUsuario;
 
-    public View_HistoricoEmprestimo() {}
+    public View_HistoricoEmprestimo() {
+    }
 
-    public View_HistoricoEmprestimo(int idHistorico, int idEmprestimo, String responsavel, String item, String status, Date dataAtualizacao) {
-        this.idHistorico = idHistorico;
-        this.idEmprestimo = idEmprestimo;
-        this.responsavel = responsavel;
-        this.item = item;
-        this.status = status;
-        this.dataAtualizacao = dataAtualizacao;
+    public String getMatriculaUsuario() {
+        return matriculaUsuario;
+    }
+
+    public void setMatriculaUsuario(String matriculaUsuario) {
+        this.matriculaUsuario = matriculaUsuario;
     }
 
     public int getIdHistorico() {
@@ -80,14 +74,14 @@ public class View_HistoricoEmprestimo {
 
     @Override
     public String toString() {
-        return "HistoricoEmprestimo{" +
-                "idHistorico=" + idHistorico +
-                ", idEmprestimo=" + idEmprestimo +
-                ", responsavel='" + responsavel + '\'' +
-                ", item='" + item + '\'' +
-                ", status='" + status + '\'' +
-                ", dataAtualizacao=" + dataAtualizacao +
-                '}';
+        return "HistoricoEmprestimo{"
+                + "idHistorico=" + idHistorico
+                + ", idEmprestimo=" + idEmprestimo
+                + ", responsavel='" + responsavel + '\''
+                + ", item='" + item + '\''
+                + ", status='" + status + '\''
+                + ", dataAtualizacao=" + dataAtualizacao
+                + '}';
     }
 
     @Override
@@ -119,5 +113,5 @@ public class View_HistoricoEmprestimo {
         }
         return Objects.equals(this.dataAtualizacao, other.dataAtualizacao);
     }
-    
+
 }

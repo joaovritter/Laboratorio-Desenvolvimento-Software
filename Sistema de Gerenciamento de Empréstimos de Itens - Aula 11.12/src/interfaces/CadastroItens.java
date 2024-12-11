@@ -1,5 +1,8 @@
 package interfaces;
 
+import DAO.ItemDAO;
+import beans.Item;
+
 public class CadastroItens extends javax.swing.JFrame {
 
     public CadastroItens() {
@@ -14,10 +17,7 @@ public class CadastroItens extends javax.swing.JFrame {
         jblCadastro = new javax.swing.JLabel();
         jblNome = new javax.swing.JLabel();
         jblCategoria = new javax.swing.JLabel();
-        jblEstado = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
-        Rdo_BtnDisponivel = new javax.swing.JRadioButton();
-        Rdio_BtnEmprestado = new javax.swing.JRadioButton();
+        TxtNome = new javax.swing.JTextField();
         CmbCategoria = new javax.swing.JComboBox<>();
         BtnCadastrar = new javax.swing.JButton();
 
@@ -34,22 +34,17 @@ public class CadastroItens extends javax.swing.JFrame {
         jblCategoria.setFont(new java.awt.Font("Imprint MT Shadow", 0, 14)); // NOI18N
         jblCategoria.setText("Categoria:");
 
-        jblEstado.setFont(new java.awt.Font("Imprint MT Shadow", 0, 14)); // NOI18N
-        jblEstado.setText("Estado:");
-
-        Btn_GrpEstado.add(Rdo_BtnDisponivel);
-        Rdo_BtnDisponivel.setFont(new java.awt.Font("Imprint MT Shadow", 0, 12)); // NOI18N
-        Rdo_BtnDisponivel.setText("Disponível");
-
-        Btn_GrpEstado.add(Rdio_BtnEmprestado);
-        Rdio_BtnEmprestado.setFont(new java.awt.Font("Imprint MT Shadow", 0, 12)); // NOI18N
-        Rdio_BtnEmprestado.setText("Emprestado");
-
         CmbCategoria.setFont(new java.awt.Font("Imprint MT Shadow", 0, 12)); // NOI18N
-        CmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolha", "Chave", "Controle", "Caneta" }));
+        CmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chave", "Controle", "Caneta" }));
+        CmbCategoria.setSelectedIndex(-1);
 
         BtnCadastrar.setFont(new java.awt.Font("Imprint MT Shadow", 0, 14)); // NOI18N
         BtnCadastrar.setText("Cadastrar");
+        BtnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCadastrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -63,21 +58,15 @@ public class CadastroItens extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jblNome)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNome))
+                                .addComponent(TxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jblCategoria)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jblEstado)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Rdo_BtnDisponivel)
-                                .addGap(18, 18, 18)
-                                .addComponent(Rdio_BtnEmprestado)))
+                                .addComponent(CmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 20, Short.MAX_VALUE))
                     .addComponent(BtnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -94,14 +83,9 @@ public class CadastroItens extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jblCategoria)
-                            .addComponent(CmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jblEstado)
-                            .addComponent(Rdo_BtnDisponivel)
-                            .addComponent(Rdio_BtnEmprestado)))
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(CmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(TxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(BtnCadastrar)
                 .addContainerGap())
         );
@@ -109,8 +93,21 @@ public class CadastroItens extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
+    private void BtnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCadastrarActionPerformed
+        Item i = new Item();
+        i.setNome(TxtNome.getText());
+        i.setCategoria((String) CmbCategoria.getSelectedItem());
+
+        ItemDAO iDAO = new ItemDAO();
+        iDAO.inserir(i);
+        limparFormulario();
+    }//GEN-LAST:event_BtnCadastrarActionPerformed
+
+    public void limparFormulario() {
+        TxtNome.setText("");
+        CmbCategoria.setSelectedIndex(-1);
+    }
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -123,12 +120,9 @@ public class CadastroItens extends javax.swing.JFrame {
     private javax.swing.JButton BtnCadastrar;
     private javax.swing.ButtonGroup Btn_GrpEstado;
     private javax.swing.JComboBox<String> CmbCategoria;
-    private javax.swing.JRadioButton Rdio_BtnEmprestado;
-    private javax.swing.JRadioButton Rdo_BtnDisponivel;
+    private javax.swing.JTextField TxtNome;
     private javax.swing.JLabel jblCadastro;
     private javax.swing.JLabel jblCategoria;
-    private javax.swing.JLabel jblEstado;
     private javax.swing.JLabel jblNome;
-    private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 }

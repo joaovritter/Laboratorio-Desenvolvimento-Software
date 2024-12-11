@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAO;
 
 import beans.Item;
@@ -11,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemDAO {
-    
+
     private Conexao conexao;
     private Connection conn;
 
@@ -19,7 +15,7 @@ public class ItemDAO {
         this.conexao = new Conexao();
         this.conn = this.conexao.getConexao();
     }
-    
+
     public void inserir(Item item) {
         String sql = "INSERT INTO Itens (nome, categoria) VALUES (?, ?)";
         try {
@@ -55,10 +51,7 @@ public class ItemDAO {
             System.out.println("Erro ao excluir item: " + ex.getMessage());
         }
     }
-    /***
-     * Método de select (seleciona todos registros), utiliza o prepareStatement para receber os dados da consulta.
-     * @return 
-     */
+
     public List<Item> getItens() {
         String sql = "SELECT * FROM Itens";
         try {
@@ -78,13 +71,8 @@ public class ItemDAO {
             return null;
         }
     }
-    /***
-     * Método do select com where id
-     * Prepara o objeto usuario que armazena a consulta.
-     * @param id Id do item específica a ser pesquisada
-     * @return 
-     */
-   public Item getItem(int id) {
+
+    public Item getItem(int id) {
         String sql = "SELECT * FROM Itens WHERE id = ?";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -98,12 +86,12 @@ public class ItemDAO {
                 item.setCategoria(rs.getString("categoria"));
                 return item;
             } else {
-                return null; // Item não encontrado
+                return null;
             }
         } catch (SQLException ex) {
             System.out.println("Erro ao buscar o item: " + ex.getMessage());
             return null;
         }
     }
-   
+
 }

@@ -1,26 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package beans;
 
 import java.util.Objects;
 
-/**
- *
- * @author salam
- */
 public class Item {
+
     private int id;
     private String nome;
     private String categoria;
 
-    public Item() {}
-
-    public Item(int id, String nome, String categoria) {
-        this.id = id;
-        this.nome = nome;
-        this.categoria = categoria;
+    public Item() {
     }
 
     public int getId() {
@@ -49,11 +37,11 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", categoria='" + categoria + '\'' +
-                '}';
+        return "Item{"
+                + "id=" + id
+                + ", nome='" + nome + '\''
+                + ", categoria='" + categoria + '\''
+                + '}';
     }
 
     @Override
@@ -82,5 +70,4 @@ public class Item {
         }
         return Objects.equals(this.categoria, other.categoria);
     }
-    
 }

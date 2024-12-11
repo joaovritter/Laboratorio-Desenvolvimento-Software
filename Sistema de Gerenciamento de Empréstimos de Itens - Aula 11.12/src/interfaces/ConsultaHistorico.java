@@ -1,9 +1,21 @@
 package interfaces;
 
+import DAO.EmprestimoDAO;
+import beans.View_HistoricoEmprestimo;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 public class ConsultaHistorico extends javax.swing.JFrame {
+
+    String filtroMatricula = null;
+    String filtroNomeItem = null;
 
     public ConsultaHistorico() {
         initComponents();
+        preencheTabela(filtroMatricula, filtroNomeItem);
     }
 
     @SuppressWarnings("unchecked")
@@ -16,8 +28,8 @@ public class ConsultaHistorico extends javax.swing.JFrame {
         TblConsulta = new javax.swing.JTable();
         JblNome = new javax.swing.JLabel();
         JblSelecione = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        Rda_BtnUsuario = new javax.swing.JRadioButton();
+        Rda_BtnItem = new javax.swing.JRadioButton();
         JblMatricula = new javax.swing.JLabel();
         TxtNome = new javax.swing.JTextField();
         TxtMatricula = new javax.swing.JTextField();
@@ -33,7 +45,7 @@ public class ConsultaHistorico extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Data", "Hora", "Quem / O que"
+                "Usuário", "Matricula", "Item", "Status", "Data"
             }
         ));
         jScrollPane1.setViewportView(TblConsulta);
@@ -45,26 +57,48 @@ public class ConsultaHistorico extends javax.swing.JFrame {
         JblSelecione.setFont(new java.awt.Font("Imprint MT Shadow", 0, 14)); // NOI18N
         JblSelecione.setText("Selecione:");
 
-        Grp_BtnConsulta.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Imprint MT Shadow", 0, 12)); // NOI18N
-        jRadioButton1.setText("Usuário");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        Grp_BtnConsulta.add(Rda_BtnUsuario);
+        Rda_BtnUsuario.setFont(new java.awt.Font("Imprint MT Shadow", 0, 12)); // NOI18N
+        Rda_BtnUsuario.setText("Usuário");
+        Rda_BtnUsuario.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                Rda_BtnUsuarioStateChanged(evt);
+            }
+        });
+        Rda_BtnUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                Rda_BtnUsuarioActionPerformed(evt);
             }
         });
 
-        Grp_BtnConsulta.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Imprint MT Shadow", 0, 12)); // NOI18N
-        jRadioButton2.setText("Item");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        Grp_BtnConsulta.add(Rda_BtnItem);
+        Rda_BtnItem.setFont(new java.awt.Font("Imprint MT Shadow", 0, 12)); // NOI18N
+        Rda_BtnItem.setText("Item");
+        Rda_BtnItem.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                Rda_BtnItemStateChanged(evt);
+            }
+        });
+        Rda_BtnItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                Rda_BtnItemActionPerformed(evt);
             }
         });
 
         JblMatricula.setFont(new java.awt.Font("Imprint MT Shadow", 0, 14)); // NOI18N
         JblMatricula.setText("Matrícula:");
+
+        TxtNome.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                TxtNomeCaretUpdate(evt);
+            }
+        });
+
+        TxtMatricula.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                TxtMatriculaCaretUpdate(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -73,24 +107,27 @@ public class ConsultaHistorico extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(JblSelecione)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButton2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(JblMatricula)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TxtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(JblConsulta)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(JblNome)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(TxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(13, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(JblSelecione)
+                                .addGap(18, 18, 18)
+                                .addComponent(Rda_BtnUsuario)
+                                .addGap(18, 18, 18)
+                                .addComponent(Rda_BtnItem))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(JblMatricula)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TxtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(JblConsulta)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(JblNome)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(TxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 215, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,8 +137,8 @@ public class ConsultaHistorico extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JblSelecione)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(Rda_BtnUsuario)
+                    .addComponent(Rda_BtnItem))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JblNome)
@@ -110,7 +147,7 @@ public class ConsultaHistorico extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JblMatricula)
                     .addComponent(TxtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -118,18 +155,59 @@ public class ConsultaHistorico extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void Rda_BtnUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rda_BtnUsuarioActionPerformed
         TxtNome.setEnabled(false);
         TxtMatricula.setEnabled(true);
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_Rda_BtnUsuarioActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void Rda_BtnItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rda_BtnItemActionPerformed
         TxtNome.setEnabled(true);
         TxtMatricula.setEnabled(false);
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_Rda_BtnItemActionPerformed
 
-    
-    
+    private void Rda_BtnUsuarioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_Rda_BtnUsuarioStateChanged
+        preencheTabela(filtroMatricula, filtroNomeItem);
+    }//GEN-LAST:event_Rda_BtnUsuarioStateChanged
+
+    private void Rda_BtnItemStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_Rda_BtnItemStateChanged
+        preencheTabela(filtroMatricula, filtroNomeItem);
+    }//GEN-LAST:event_Rda_BtnItemStateChanged
+
+    private void TxtNomeCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_TxtNomeCaretUpdate
+        filtroNomeItem = TxtNome.getText();
+        preencheTabela(filtroMatricula, filtroNomeItem);
+    }//GEN-LAST:event_TxtNomeCaretUpdate
+
+    private void TxtMatriculaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_TxtMatriculaCaretUpdate
+        filtroMatricula = TxtMatricula.getText();
+        preencheTabela(filtroMatricula, filtroNomeItem);
+    }//GEN-LAST:event_TxtMatriculaCaretUpdate
+
+    public void preencheTabela(String filtroMatricula, String filtroNomeItem) {
+        try {
+            EmprestimoDAO eDAO = new EmprestimoDAO();
+
+            List<View_HistoricoEmprestimo> listaHistorico = eDAO.vw_HistoricoEmprestimos(filtroMatricula, filtroNomeItem);
+
+            DefaultTableModel tabelaHistorico = (DefaultTableModel) TblConsulta.getModel();
+
+            tabelaHistorico.setNumRows(0);
+
+            for (View_HistoricoEmprestimo h : listaHistorico) {
+                Object[] obj = new Object[]{
+                    h.getResponsavel(),
+                    h.getMatriculaUsuario(),
+                    h.getItem(),
+                    h.getStatus(),
+                    h.getDataAtualizacao()
+                };
+                tabelaHistorico.addRow(obj);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultaHistorico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -145,11 +223,11 @@ public class ConsultaHistorico extends javax.swing.JFrame {
     private javax.swing.JLabel JblMatricula;
     private javax.swing.JLabel JblNome;
     private javax.swing.JLabel JblSelecione;
+    private javax.swing.JRadioButton Rda_BtnItem;
+    private javax.swing.JRadioButton Rda_BtnUsuario;
     private javax.swing.JTable TblConsulta;
     private javax.swing.JTextField TxtMatricula;
     private javax.swing.JTextField TxtNome;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

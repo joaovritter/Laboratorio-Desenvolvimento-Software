@@ -1,17 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package beans;
+
 import java.util.Objects;
 
-/**
- *no pacote beans temos a classe Alunos que mapeia a tabela do banco de
-dados, ou seja, a classe tem como atributos as colunas da tabela. 
- * @author Admin
- */
-public class Usuario{
+public class Usuario {
+
     private int id;
     private String nome;
     private String matricula;
@@ -52,7 +44,6 @@ public class Usuario{
         this.contato = contato;
     }
 
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -74,8 +65,8 @@ public class Usuario{
         if (!Objects.equals(this.matricula, other.matricula)) {
             return false;
         }
-        return Objects.equals(this.contato, other.contato);     
-     
+        return Objects.equals(this.contato, other.contato);
+
     }
 
     @Override
@@ -83,5 +74,4 @@ public class Usuario{
         return "Usuario: " + "id=" + id + ", nome=" + nome + ", matricula=" + matricula + ", contato=" + contato + '}';
     }
 
-    
 }

@@ -1,10 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package beans;
 
-import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -12,6 +7,7 @@ import java.util.Objects;
  * @author João Capudo
  */
 public class Emprestimo {
+
     private int id;
     private Item id_item;
     private Usuario id_usuario;
@@ -110,7 +106,5 @@ public class Emprestimo {
     public String toString() {
         return "Emprestimo{" + "id=" + id + ", id_item=" + id_item + ", id_usuario=" + id_usuario + ", data_emprestimo=" + data_emprestimo + ", data_vencimento=" + data_vencimento + ", estado=" + estado + '}';
     }
-    
-    
-    
+
 }

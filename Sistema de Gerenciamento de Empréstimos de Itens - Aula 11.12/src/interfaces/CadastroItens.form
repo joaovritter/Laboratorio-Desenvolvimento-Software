@@ -36,23 +36,16 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jblNome" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtNome" max="32767" attributes="0"/>
+                              <Component id="TxtNome" min="-2" pref="193" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jblCategoria" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="CmbCategoria" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jblEstado" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="Rdo_BtnDisponivel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="Rdio_BtnEmprestado" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="0" pref="20" max="32767" attributes="0"/>
@@ -77,16 +70,10 @@
                           <Component id="jblCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="CmbCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jblEstado" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Rdo_BtnDisponivel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Rdio_BtnEmprestado" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
-                  <Component id="txtNome" min="-2" max="-2" attributes="0"/>
+                  <Component id="TxtNome" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="14" max="32767" attributes="0"/>
               <Component id="BtnCadastrar" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -122,37 +109,7 @@
         <Property name="text" type="java.lang.String" value="Categoria:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jblEstado">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Imprint MT Shadow" size="14" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Estado:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtNome">
-    </Component>
-    <Component class="javax.swing.JRadioButton" name="Rdo_BtnDisponivel">
-      <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="Btn_GrpEstado"/>
-        </Property>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Imprint MT Shadow" size="12" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Dispon&#xed;vel"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JRadioButton" name="Rdio_BtnEmprestado">
-      <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="Btn_GrpEstado"/>
-        </Property>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Imprint MT Shadow" size="12" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Emprestado"/>
-      </Properties>
+    <Component class="javax.swing.JTextField" name="TxtNome">
     </Component>
     <Component class="javax.swing.JComboBox" name="CmbCategoria">
       <Properties>
@@ -160,13 +117,13 @@
           <Font name="Imprint MT Shadow" size="12" style="0"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Escolha"/>
-            <StringItem index="1" value="Chave"/>
-            <StringItem index="2" value="Controle"/>
-            <StringItem index="3" value="Caneta"/>
+          <StringArray count="3">
+            <StringItem index="0" value="Chave"/>
+            <StringItem index="1" value="Controle"/>
+            <StringItem index="2" value="Caneta"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="-1"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -179,6 +136,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Cadastrar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnCadastrarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
